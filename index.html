@@ -90,11 +90,11 @@
           : url
       };
     };
-    //YOUR TURN: add your Mapbox token 
-    mapboxgl.accessToken = '<Add your Mapbox token >'; //Mapbox token 
+    //YOUR TURN: add your Mapbox token
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia2FwcHNpbmdlciIsImEiOiJjazNvdzdsbTcyNWRwM2NwaHh1NDBwcW4wIn0.DFKct3jowLrHVz6TQxaGzg'; //Mapbox token
     var map = new mapboxgl.Map({
       container: 'map', // container id
-      style: 'mapbox://styles/mapbox/streets-v11', //stylesheet location
+      style: 'mapbox://styles/mapbox/light-v10', //stylesheet location
       center: [-122.411464, 37.7852299], // starting position
       zoom: 10,// starting zoom
       transformRequest: transformRequest
@@ -104,7 +104,7 @@
       $.ajax({
         type: "GET",
         //YOUR TURN: Replace with csv export link
-        url: '<Replace with csv export link>',
+        url: 'https://docs.google.com/spreadsheets/d/1MiqwGe_7m6B0xFQfaS3GGRO8CmGm5xlXPICDPEeGHyo/gviz/tq?tqx=out:csv&sheet=Sheet1',
         dataType: "text",
         success: function (csvData) { makeGeoJSON(csvData); }
       });
@@ -119,7 +119,7 @@
         }, function (err, data) {
           map.on('load', function () {
 
-            //Add the the layer to the map 
+            //Add the the layer to the map
             map.addLayer({
               'id': 'csvData',
               'type': 'circle',
@@ -139,9 +139,9 @@
             map.on('click', 'csvData', function (e) {
               var coordinates = e.features[0].geometry.coordinates.slice();
 
-              //set popup text 
-              //You can adjust the values of the popup to match the headers of your CSV. 
-              // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV. 
+              //set popup text
+              //You can adjust the values of the popup to match the headers of your CSV.
+              // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV.
               var description = `<h3>` + e.features[0].properties.Name + `</h3>` + `<h4>` + `<b>` + `Address: ` + `</b>` + e.features[0].properties.Address + `</h4>` + `<h4>` + `<b>` + `Phone: ` + `</b>` + e.features[0].properties.Phone + `</h4>`;
 
               // Ensure that if the map is zoomed out such that multiple
